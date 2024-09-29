@@ -11,7 +11,7 @@ public class UserRequest {
     @Data
     public static class SaveOneDTO {
 
-        @NotEmpty
+        @NotEmpty(message = "이름은 비어 있을 수 없습니다.")
         private String name;
 
         public User toEntity() {
@@ -23,7 +23,7 @@ public class UserRequest {
     @Data
     public static class SaveMultipleDTO {
 
-        @NotEmpty
+        @NotEmpty(message = "이름 리스트는 비어 있을 수 없습니다.")
         private List<String> name;
 
         public List<User> toEntity() {
@@ -40,7 +40,7 @@ public class UserRequest {
     @Data
     public static class UpdateDTO {
 
-        @NotEmpty
+        @NotEmpty(message = "이름은 비어 있을 수 없습니다.")
         private String name;
 
     }

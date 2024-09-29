@@ -30,25 +30,7 @@ public class GlobalValidationHandler {
         log.info("AOP is working on test method: {}", joinPoint.getSignature().getName());
     }
 
-
-
-    @Before("@annotation(org.springframework.web.bind.annotation.PostMapping) || @annotation(org.springframework.web.bind.annotation.PutMapping)")
-    public void validCheck(JoinPoint jp) {
-        Object[] args = jp.getArgs();
-        for (Object arg : args) {
-            if (arg instanceof Errors) {
-                Errors errors = (Errors) arg;
-
-                if (errors.hasErrors()) {
-                    for (FieldError error : errors.getFieldErrors()) {
-                        throw new ExceptionApi400(error.getDefaultMessage() + " : " + error.getField());
-                    }
-                }
-            }
-        }
-    }
-
-        @Pointcut ("execution(* com.example.prac.user.UserController.userSave(..)) || " +
+    @Pointcut ("execution(* com.example.prac.user.UserController.userSave(..)) || " +
             "execution(* com.example.prac.user.UserController.userSelect(..)) || " +
             "execution(* com.example.prac.user.UserController.userUpdate(..))")
     public void userApiMethods() {

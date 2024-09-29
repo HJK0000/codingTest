@@ -13,12 +13,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.Map;
 
 @SpringBootTest(classes = PracApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Transactional // test 결과 db 반영 x
 public class UserIntegrationTests {
 
     @LocalServerPort
@@ -40,7 +43,7 @@ public class UserIntegrationTests {
         // Given
         HttpHeaders headers = new HttpHeaders();
         UserRequest.SaveMultipleDTO request = new UserRequest.SaveMultipleDTO();
-        request.setName(List.of("qw", "as"));
+        request.setName(List.of("sun", "day"));
 
         HttpEntity<UserRequest.SaveMultipleDTO> entity = new HttpEntity<>(request, headers);
 
@@ -65,7 +68,7 @@ public class UserIntegrationTests {
         // Given
         HttpHeaders headers = new HttpHeaders();
         UserRequest.SaveMultipleDTO request = new UserRequest.SaveMultipleDTO();
-        request.setName(List.of("coco", "adf", "coco")); // 중복된 사용자 "coco" 포함
+        request.setName(List.of("sun", "day", "sun")); // 중복된 사용자 "sun" 포함
 
         HttpEntity<UserRequest.SaveMultipleDTO> entity = new HttpEntity<>(request, headers);
 
@@ -78,6 +81,6 @@ public class UserIntegrationTests {
         Map<String, Object> responseBody = response.getBody();
 
         // 에러 메시지 검증
-        assertThat(responseBody.get("reason")).isEqualTo("이미 존재하는 유저입니다: coco");
+        assertThat(responseBody.get("reason")).isEqualTo("이미 존재하는 유저입니다: sun");
     }
 }

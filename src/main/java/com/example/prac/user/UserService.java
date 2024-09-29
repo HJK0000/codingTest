@@ -20,7 +20,7 @@ public class UserService {
 
 
 /*    @Transactional
-    public UserResponse.JoinDTO 회원한명등록(UserRequest.SaveDTO saveDTO) {
+    public UserResponse.JoinDTO 회원한명등록(UserRequest.SaveOneDTO saveDTO) {
 
         Optional<User> userOP = userRepository.findByName(saveDTO.getName());
 

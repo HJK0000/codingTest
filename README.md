@@ -11,9 +11,8 @@
 * Spring Web
 * Lombok 
 * H2 Database ( ID : pc, PW : 2024 )
-* Devtool
-* AOP
 * Validation
+* JPA
 
 ### 작업일
 

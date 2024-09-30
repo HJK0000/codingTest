@@ -26,6 +26,13 @@ public class UrlFilter implements Filter {
 
         // 요청 URL 가져오기
         String requestUrl = req.getRequestURI();
+        
+        
+        // h2 console 로 요청이 들어오면 필터링 시키지말고 통과시키기
+        if (requestUrl.startsWith("/h2-console")) {
+            chain.doFilter(request, response);
+            return;  // 필터링을 건너뛰고 반환
+        }
 
         // 특수문자 필터링
         if (DISALLOWED_SPECIAL_CHARACTERS.matcher(requestUrl).find()) {
